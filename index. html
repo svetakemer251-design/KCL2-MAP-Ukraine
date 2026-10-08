@@ -36,7 +36,7 @@
         }
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -47,43 +47,12 @@
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
             border: 1px solid #334155;
-            position: relative;
+            height: 500px;
         }
-        .map-card img {
+        iframe {
             width: 100%;
-            height: auto;
-            display: block;
-            min-height: 250px;
-            background-color: #0f172a;
-        }
-        .info-bar {
-            padding: 12px 15px;
-            font-size: 13px;
-            color: #cbd5e1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #172033;
-            border-top: 1px solid #334155;
-        }
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            margin-right: 6px;
-            box-shadow: 0 0 8px #22c55e;
-        }
-        .btn-refresh {
-            background-color: #38bdf8;
-            color: #0f172a;
+            height: 100%;
             border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
         }
         .radar-panel {
             background-color: #1e293b;
@@ -119,19 +88,13 @@
 
     <div class="container">
         <div class="map-card">
-            <img id="alertMap" src="https://ubstatic.com/map/map.png" alt="Карта тривог" onerror="fallbackMap()">
-            <div class="info-bar">
-                <div>
-                    <span class="status-dot"></span>Онлайн
-                </div>
-                <button class="btn-refresh" onclick="updateMap()">Оновити карту</button>
-            </div>
+            <iframe src="https://ubstatic.com/map/" title="Карта тривог"></iframe>
         </div>
 
         <div class="radar-panel">
             <div class="radar-title">🚀 Моніторинг загроз</div>
             <div class="radar-list">
-                Система моніторингу повітряного простору працює в режимі оновлення.
+                Карта працює в реальному часі та оновлюється автоматично.
             </div>
         </div>
     </div>
@@ -139,26 +102,6 @@
     <footer>
         KCL2 Vibes & Daily
     </footer>
-
-    <script>
-        const sources = [
-            "https://ubstatic.com/map/map.png",
-            "https://alerts.in.ua/map.png"
-        ];
-        let currentSource = 0;
-
-        function updateMap() {
-            const img = document.getElementById('alertMap');
-            img.src = sources[currentSource] + "?t=" + new Date().getTime();
-        }
-
-        function fallbackMap() {
-            currentSource = (currentSource + 1) % sources.length;
-            updateMap();
-        }
-
-        setInterval(updateMap, 30000);
-    </script>
 
 </body>
 </html>
